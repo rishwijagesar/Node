@@ -6,7 +6,7 @@ const board = new Board({
     io: new raspio()
 });
 
-const servo = new Servo("P1-37");
+const servo = new Servo("P1-12");
 
 board.on('ready', function () {
 
