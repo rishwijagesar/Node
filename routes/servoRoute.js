@@ -4,13 +4,17 @@ const {Board, Servo} = require("johnny-five");
 const board = new Board();
 
 
-
+const servo  = new Servo.Continuous("P1-11");
 board.on('ready', function() {
  
-    const servo  = new Servo.Continuous("P1-11");
-
     router.get('/spin', function(req, res){
         servo.sweep();
     });
 
 });
+
+board.on("exit", () => {
+   servo.stop();
+});
+
+module.exports = router;
