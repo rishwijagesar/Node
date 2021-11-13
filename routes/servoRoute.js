@@ -8,10 +8,12 @@ const servo  = new Servo.Continuous("P1-11");
 board.on('ready', function() {
  
     servo.stop();
-    
+
     router.get('/spin', function(req, res){
-        servo.sweep();
+        //servo.sweep();
     });
+
+    
 
 });
 
