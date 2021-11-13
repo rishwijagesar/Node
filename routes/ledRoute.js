@@ -7,7 +7,7 @@ const board =new five.Board({
     io: new raspio()
 });
 
-const LEDpin = new five.Led("P1-12");
+const LEDpin = new five.Led("P1-32");
 
 board.on('ready', function() {
     
