@@ -4,22 +4,18 @@ const fs = require('fs');
 const cors = require('cors');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const header_middleware = require("./middlewares/header");
 
 app.use(cors());
+app.use(header_middleware);
 
 // import Routes
 const testRoute = require('./routes/testRoute');
+const ledRoute = require('./routes/ledRoute');
 
 // Middlewares
 app.use('/test', testRoute);
-
-// app.get('/*', (req, res) => {
-
-//    res.writeHead(200, {'Content-Type': 'text/html'});
-//    let html = fs.readFileSync(__dirname + '/website/index.html');
-//    res.end(html);
-
-// });
+app.use('/led', ledRoute);
 
 const swaggerDefinition = {
     openapi: '3.0.0',
@@ -43,7 +39,14 @@ const options = {
 };
 
 const swaggerSpec = swaggerJSDoc(options);
-
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.get('/*', (req, res) => {
+
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  let html = fs.readFileSync(__dirname + '/website/index.html');
+  res.end(html);
+
+});
 
 module.exports = app;

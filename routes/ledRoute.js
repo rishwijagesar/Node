@@ -3,36 +3,17 @@ const router = express.Router();
 
 var raspio = require("raspi-io").RaspiIO;
 var five = require("johnny-five");
-
-var board = new five.Board({
+var board =new five.Board({
     io: new raspio()
 });
 
-router.post('/', (req, res) => {
-    toggleLed();
-    res.json({ status: isOn });
-});
+board.on('ready', function() {
+    var LEDpin = new five.Pin("P1-12");
+    var analogPin = new five.Pin('A0');
 
-board.on('ready', function() { 
-    // Define the pin 13 to be used
-    led = new five.Led(13);
-    // Turn off the Led
-    led.off();
-    // save the actual state of the Led
-    isReady = true; 
-});
-
-function toggleLed () {
-    // If the Led is on
-    if (isOn) {
-        //Turn off the Led
-        led.off();
-        isOn = false;
-    } else {
-        //Turn on the Led
-        led.on();
-        isOn = true;
-    }
-} 
+    router.get('/led/on', function(req, res){
+        LEDpin.high();
+    });
+})
 
 module.exports = router;
