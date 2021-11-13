@@ -1,18 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const {Board, Servo} = require("johnny-five");
+const board = new Board();
 
-const raspio = require("raspi-io").RaspiIO;
-const {five, Servo} = require("johnny-five");
-// const board = new five.Board({
-//     io: new raspio()
-// });
 
-const Servopin = new Servo.Continuous("P1-11");
 
 board.on('ready', function() {
  
+    const servo  = new Servo.Continuous("P1-11");
+
     router.get('/spin', function(req, res){
-        Servopin.sweep();
+        servo.sweep();
     });
 
 });
