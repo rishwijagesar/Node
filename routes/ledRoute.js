@@ -42,6 +42,6 @@ board.on('ready', function() {
 
 board.on("exit", () => {
     LEDpin.off();
-})
+});
 
 module.exports = router;
