@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 import time
 
 P_A1 = 7  # adapt to your wiring
-P_A2 = 11 # ditto
-P_B1 = 13 # ditto
+P_A2 = 13 # ditto
+P_B1 = 11 # ditto
 P_B2 = 15 # ditto
 delay = 0.005 # time to settle
 
