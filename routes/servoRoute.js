@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const raspio = require("raspi-io").RaspiIO;
-const five = require("johnny-five");
-const board =new five.Board({
+const {five, servo} = require("johnny-five");
+const board = new five.Board({
     io: new raspio()
 });
 
