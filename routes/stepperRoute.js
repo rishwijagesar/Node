@@ -13,6 +13,16 @@ router.get('/left', (req, res) => {
     });
 });
 
+router.get('/right', (req, res) => {
+    let dataToSend;
+    const python = spawn('python', ['./helper/stepper.py']);
+
+    python.on('close', (code) => {
+        console.log(`child process close all stdio with code ${code}`);
+        // send data to browser
+        res.send(dataToSend)
+    });
+});
 
 
 module.exports = router;
