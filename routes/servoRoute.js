@@ -3,14 +3,19 @@ const router = express.Router();
 const {Board, Servo} = require("johnny-five");
 const board = new Board();
 
-const servo  = new Servo.Continuous("P1-11");
+
 
 board.on('ready', function() {
  
-    servo.stop();
 
     router.get('/spin', function(req, res){
-        //servo.sweep();
+        const servo  = new Servo.Continuous("P1-11");
+        servo.sweep();
+    });
+
+    router.get('/stop', function(req, res){
+        const servo  = new Servo.Continuous("P1-11");
+        servo.stop();
     });
 
     
