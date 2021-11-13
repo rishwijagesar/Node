@@ -6,9 +6,10 @@ var five = require("johnny-five");
 var board =new five.Board({
     io: new raspio()
 });
+var LEDpin = new five.Led("P1-12");
 
 board.on('ready', function() {
-    var LEDpin = new five.Led("P1-12");
+    
 
     router.get('/on', function(req, res){
         LEDpin.on();
@@ -29,6 +30,10 @@ board.on('ready', function() {
             LEDpin.fadeOut();
         });
     });
+});
+
+board.on("exit", () => {
+    LEDpin.off();
 })
 
 module.exports = router;
