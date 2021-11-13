@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time 
 
-motorPins = (12, 16, 18, 22)
+motorPins = (7, 11, 13, 15)
 CCWStep = (0x01,0x02,0x04,0x08)
 CWStep = (0x08,0x04,0x02,0x01)
 
@@ -25,7 +25,7 @@ def moveOnePeriod(direction,ms):
 def moveSteps(direction, ms, steps):
     for i in range(steps):
         moveOnePeriod(direction, ms)
-        
+
 def loop():
     while True:
         moveSteps(1,3,512)
