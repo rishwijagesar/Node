@@ -13,11 +13,13 @@ app.use(header_middleware);
 const testRoute = require('./routes/testRoute');
 const ledRoute = require('./routes/ledRoute');
 const servoRoute = require('./routes/servoRoute');
+const stepperRoute = require('./routes/stepperRoute');
 
 // Middlewares
 app.use('/test', testRoute);
 app.use('/led', ledRoute);
 app.use('/servo', servoRoute);
+app.use('/stepper', stepperRoute);
 
 const swaggerDefinition = {
     openapi: '3.0.0',
