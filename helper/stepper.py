@@ -1,44 +1,67 @@
-import RPi.GPIO as GPIO
+#!/usr/bin/python
+import sys
 import time
+import RPi.GPIO as GPIO
+ 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
-P_A1 = 7  # adapt to your wiring
-P_A2 = 13 # ditto
-P_B1 = 11 # ditto
-P_B2 = 15 # ditto
-delay = 0.005 # time to settle
+aMotorPins = [7, 13, 11, 15]
+ 
+# Set all pins as output
+for pin in aMotorPins:
+	GPIO.setup(pin,GPIO.OUT)
+	GPIO.output(pin, False)
 
-def setup():
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(P_A1, GPIO.OUT)
-    GPIO.setup(P_A2, GPIO.OUT)
-    GPIO.setup(P_B1, GPIO.OUT)
-    GPIO.setup(P_B2, GPIO.OUT)
+aSequence = [
+	[1,0,0,1],
+	[1,0,0,0],
+	[1,1,0,0],
+	[0,1,0,0],
+	[0,1,1,0],
+	[0,0,1,0],
+	[0,0,1,1],
+	[0,0,0,1]
+]
+        
+iNumSteps = len(aSequence)
 
-def forwardStep():
-    setStepper(1, 0, 1, 0)
-    setStepper(0, 1, 1, 0)
-    setStepper(0, 1, 0, 1)
-    setStepper(1, 0, 0, 1)
+if sys.argv[3] == "cw":
+	iDirection = 1
+else:
+	iDirection = -1
 
-def backwardStep():
-    setStepper(1, 0, 0, 1)
-    setStepper(0, 1, 0, 1)
-    setStepper(0, 1, 1, 0)
-    setStepper(1, 0, 1, 0)
-  
-def setStepper(in1, in2, in3, in4):
-    GPIO.output(P_A1, in1)
-    GPIO.output(P_A2, in2)
-    GPIO.output(P_B1, in3)
-    GPIO.output(P_B2, in4)
-    time.sleep(delay)
+fWaitTime = int(sys.argv[1]) / float(1000)
 
-setup()
-# 512 steps for 360 degrees, adapt to your motor
-while True:
-    print "forward"
-    for i in range(256):
-        forwardStep() 
-    print "backward"
-    for i in range(256):
-        backwardStep() 
+iDeg = int(int(sys.argv[2]) * 11.377777777777)
+
+iSeqPos = 0
+# If the fourth argument is present, it means that the motor should start at a
+# specific position from the aSequence list
+if len(sys.argv) > 4:
+	iSeqPos = int(sys.argv[4])
+
+# 1024 steps is 90 degrees
+# 4096 steps is 360 degrees
+
+for step in range(0,iDeg):
+
+	for iPin in range(0, 4):
+		iRealPin = aMotorPins[iPin]
+		if aSequence[iSeqPos][iPin] != 0:
+			GPIO.output(iRealPin, True)
+		else:
+			GPIO.output(iRealPin, False)
+ 
+	iSeqPos += iDirection
+ 
+	if (iSeqPos >= iNumSteps):
+		iSeqPos = 0
+	if (iSeqPos < 0):
+		iSeqPos = iNumSteps + iDirection
+ 
+	# Time to wait between steps
+	time.sleep(fWaitTime)
+
+for pin in aMotorPins:
+	GPIO.output(pin, False)
