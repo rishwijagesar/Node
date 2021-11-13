@@ -6,24 +6,21 @@ const board = new Board({
     io: new raspio()
 });
 
-
+const servo = new Servo.Continuous("P1-11");
 
 board.on('ready', function () {
 
-    router.get('/spin', function (req, res) {
-        const servo = new Servo.Continuous("P1-11");
+    router.get('/spin', function (req, res) {        
         servo.sweep();
     });
 
     router.get('/stop', function (req, res) {
-        const servo = new Servo.Continuous("P1-11");
         servo.stop();
     });
 
 });
 
 board.on("exit", () => {
-    const servo = new Servo.Continuous("P1-11");
     servo.stop();
 });
 
