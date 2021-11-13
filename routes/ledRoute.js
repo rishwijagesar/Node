@@ -9,7 +9,6 @@ var board =new five.Board({
 
 board.on('ready', function() {
     var LEDpin = new five.Pin("P1-12");
-    var analogPin = new five.Pin('A0');
 
     router.get('/led/on', function(req, res){
         LEDpin.high();
