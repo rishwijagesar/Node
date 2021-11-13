@@ -27,7 +27,7 @@ def moveSteps(direction, ms, steps):
         moveOnePeriod(direction, ms)
 
 def loop():
-    moveSteps(1,3,512)
+    moveSteps(1,3,100)
     time.sleep(0.5)
 
 def motorStop():
