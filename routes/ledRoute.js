@@ -23,7 +23,11 @@ board.on('ready', function() {
     });
 
     router.get('/blink', function(req, res){
-        LEDpin.blink();
+        LEDpin.blink(500);
+
+        board.wait(5000, () => {
+            LEDpin.fadeOut();
+        });
     });
 })
 
