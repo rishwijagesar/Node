@@ -8,10 +8,18 @@ var board =new five.Board({
 });
 
 board.on('ready', function() {
-    var LEDpin = new five.Pin("P1-12");
+    var LEDpin = new five.Led("P1-12");
 
-    router.get('/led/on', function(req, res){
-        LEDpin.high();
+    router.get('/on', function(req, res){
+        LEDpin.on();
+    });
+
+    router.get('/off', function(req, res){
+        LEDpin.off();
+    });
+
+    router.get('/off', function(req, res){
+        LEDpin.pulse();
     });
 })
 
