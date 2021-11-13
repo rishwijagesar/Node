@@ -1,67 +1,56 @@
-#!/usr/bin/python
-import sys
-import time
 import RPi.GPIO as GPIO
- 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
+import time
+GPIO.setmode(GPIO.BCM)
+ControlPin = [21,20,16,12]
 
-aMotorPins = [7, 13, 11, 15]
- 
-# Set all pins as output
-for pin in aMotorPins:
+for pin in ControlPin:
 	GPIO.setup(pin,GPIO.OUT)
-	GPIO.output(pin, False)
+	GPIO.output(pin,False)
 
-aSequence = [
-	[1,0,0,1],
-	[1,0,0,0],
-	[1,1,0,0],
-	[0,1,0,0],
-	[0,1,1,0],
-	[0,0,1,0],
-	[0,0,1,1],
-	[0,0,0,1]
+step_seq_num = 0
+rot_spd = 0.001
+
+rotate = 4096
+rotate_dir = 1
+
+seq = [ [1,0,0,0],
+[1,1,0,0],
+[0,1,0,0],
+[0,1,1,0],
+[0,0,1,0],
+[0,0,1,1],
+[0,0,0,1],
+[1,0,0,1],
 ]
-        
-iNumSteps = len(aSequence)
 
-if sys.argv[3] == "cw":
-	iDirection = 1
-else:
-	iDirection = -1
+rotateF = float(input("Enter revolutions(0.00041 +):"))
+rotate_dir = input("Enter direction (1CW/-1CW) :")
+rot_spd = input("Enter speed (!-0.001):")
+rotate = int(rotateF * 4096)
+if rotate < 1:
+	rotate = 4096
+	rotate_dir = int(rotate_dir)
+if rotate_dir != 1 and rotate_dir != -1:
+	rotate_dir = 1
+	rot_spd = float(rot_spd)
+if rot_spd > 1 or rot_spd < 0.001:
+	rot_spd = 0.001
+	print(rotate,rotate_dir,rot_spd)
 
-fWaitTime = int(sys.argv[1]) / float(1000)
-
-iDeg = int(int(sys.argv[2]) * 11.377777777777)
-
-iSeqPos = 0
-# If the fourth argument is present, it means that the motor should start at a
-# specific position from the aSequence list
-if len(sys.argv) > 4:
-	iSeqPos = int(sys.argv[4])
-
-# 1024 steps is 90 degrees
-# 4096 steps is 360 degrees
-
-for step in range(0,iDeg):
-
-	for iPin in range(0, 4):
-		iRealPin = aMotorPins[iPin]
-		if aSequence[iSeqPos][iPin] != 0:
-			GPIO.output(iRealPin, True)
+for i in  range(0,(rotate+1)):
+	for pin in range(0,4):
+		pattern_pin = ControlPin[pin]
+		if seq[step_seq_num][pin] == 1:
+			GPIO.output(pattern_pin, True)
 		else:
-			GPIO.output(iRealPin, False)
- 
-	iSeqPos += iDirection
- 
-	if (iSeqPos >= iNumSteps):
-		iSeqPos = 0
-	if (iSeqPos < 0):
-		iSeqPos = iNumSteps + iDirection
- 
-	# Time to wait between steps
-	time.sleep(fWaitTime)
+			GPIO.output(pattern_pin,False)
+	
+	step_seq_num += rotate_dir
+	if(step_seq_num >= 8):
+		step_seq_num = 0
+	elif step_seq_num <0:
+		step_seq_num = 7
+	
+	time.sleep(rot_spd)
 
-for pin in aMotorPins:
-	GPIO.output(pin, False)
+GPIO.cleanup()
