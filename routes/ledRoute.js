@@ -18,8 +18,12 @@ board.on('ready', function() {
         LEDpin.off();
     });
 
-    router.get('/off', function(req, res){
+    router.get('/pulse', function(req, res){
         LEDpin.pulse();
+    });
+
+    router.get('/blink', function(req, res){
+        LEDpin.blink();
     });
 })
 
