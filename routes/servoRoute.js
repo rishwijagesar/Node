@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const raspio = require("raspi-io").RaspiIO;
 const { Board, Servo } = require("johnny-five");
-const board = new Board();
+const board = new Board({
+    io: new raspio()
+});
 
 
 
