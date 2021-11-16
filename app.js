@@ -7,19 +7,20 @@ const swaggerUi = require('swagger-ui-express');
 const header_middleware = require("./middlewares/header");
 
 app.use(cors());
+// use middleware
 app.use(header_middleware);
 
 // import Routes
-const testRoute = require('./routes/testRoute');
-const ledRoute = require('./routes/ledRoute');
-const servoRoute = require('./routes/servoRoute');
-const stepperRoute = require('./routes/stepperRoute');
+ const testRoute = require('./routes/testRoute');
+// const ledRoute = require('./routes/ledRoute');
+// const servoRoute = require('./routes/servoRoute');
+// const stepperRoute = require('./routes/stepperRoute');
 
 // Middlewares
 app.use('/test', testRoute);
-app.use('/led', ledRoute);
-app.use('/servo', servoRoute);
-app.use('/stepper', stepperRoute);
+// app.use('/led', ledRoute);
+// app.use('/servo', servoRoute);
+// app.use('/stepper', stepperRoute);
 
 const swaggerDefinition = {
     openapi: '3.0.0',
