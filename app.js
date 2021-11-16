@@ -46,6 +46,14 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get('/presentation', (req, res) => {
+
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  let html = fs.readFileSync(__dirname + '/website/presentation.html');
+  res.end(html);
+
+});
+
 app.get('/*', (req, res) => {
 
   res.writeHead(200, {'Content-Type': 'text/html'});

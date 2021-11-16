@@ -23,6 +23,7 @@
     <div class="container">
         <div class="box">
             <h1>Rishwi is the best!!</h1>
+            <button onclick="presentation()">Show Presentation</button>
 
             <h2>API Tests</h2>
             <button onclick="retrieveTestData()">Retrieve Test Data</button>
@@ -32,14 +33,18 @@
             </br>
             </br>
             <button onclick="createAccountData()">Create Account Data</button>
-            </br>
-            </br>
+
             <label for="fusername">Username:</label>
             <input type="text" id="Username" name="fname"><br><br>
             <label for="femail">Email:</label>
             <input type="text" id="Email" name="fname"><br><br>
             <label for="fpassword">Password:</label>
             <input type="text" id="Password" name="fname"><br><br>
+            <button onclick="deleteAccountData()">Delete Account Data</button>
+            </br>
+            </br>
+            <label for="fid">ID:</label>
+            <input type="text" id="id" name="fname"><br><br>
 
             <h2>Documentation</h2>
             <button onclick="documentation()">Show Documentation</button>
@@ -73,13 +78,27 @@
 
     <script>
 
+        function deleteAccountData() {
+            const id = document.getElementById('id').value;
+            fetch('http://localhost:8080/account/' + id, {
+                method: 'DELETE', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+        }
+
+        function presentation() {
+            window.location.href = 'http://localhost:8080/presentation';
+        }
+
         function createObj(obj) {
             this.username = obj.username;
             this.email = obj.email;
             this.password = obj.password;
         }
 
-        async function createAccountData() {
+        function createAccountData() {
             var username = document.getElementById('Username').value;
             var email = document.getElementById('Email').value;
             var password = document.getElementById('Password').value;
@@ -122,7 +141,7 @@
         }
 
         function ledOn() {
-            const response = await fetch('http://localhost:8080/led/on');
+            fetch('http://localhost:8080/led/on');
             document.getElementById("ledOn").innerHTML = "Led is On";
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
@@ -130,7 +149,7 @@
         }
 
         function ledOff() {
-            const response = await fetch('http://localhost:8080/led/off');
+            fetch('http://localhost:8080/led/off');
             document.getElementById("ledOff").innerHTML = "Led is Off";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
@@ -138,7 +157,7 @@
         }
 
         function ledBlink() {
-            const response = await fetch('http://localhost:8080/led/blink');
+            fetch('http://localhost:8080/led/blink');
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "Led is Blinking";
@@ -146,7 +165,7 @@
         }
 
         function ledPulse() {
-            const response = await fetch('http://localhost:8080/led/pulse');
+            fetch('http://localhost:8080/led/pulse');
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
@@ -154,19 +173,19 @@
         }
 
         function moveLeft() {
-            const response = await fetch('http://localhost:8080/stepper/left');
+            fetch('http://localhost:8080/stepper/left');
         }
 
         function moveRight() {
-            const response = await fetch('http://localhost:8080/stepper/right');
+            fetch('http://localhost:8080/stepper/right');
         }
 
         function drive() {
-            const response = await fetch('http://localhost:8080/servo/spin');
+            fetch('http://localhost:8080/servo/spin');
         }
 
         function stopdrive() {
-            const response = await fetch('http://localhost:8080/servo/stop');
+            fetch('http://localhost:8080/servo/stop');
         }
 
     </script>
