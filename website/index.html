@@ -28,6 +28,18 @@
             <button onclick="retrieveTestData()">Retrieve Test Data</button>
             <p id="retrieveTestData"></p>
 
+            <button onclick="retrieveAccountData()">Retrieve Account Data</button>
+            </br>
+            <button onclick="createAccountData()">Create Account Data</button>
+            </br>
+            </br>
+            <label for="fusername">Username:</label>
+            <input type="text" id="Username" name="fname"><br><br>
+            <label for="femail">Email:</label>
+            <input type="text" id="Email" name="fname"><br><br>
+            <label for="fpassword">Password:</label>
+            <input type="text" id="Password" name="fname"><br><br>
+
             <h2>Documentation</h2>
             <button onclick="documentation()">Show Documentation</button>
 
@@ -54,14 +66,54 @@
 
         <div class="box">
             <p>Output</p>
+            <div id="myData"></div>
         </div>
     </div>
 
     <script>
 
+        function createObj(obj) {
+            this.username = obj.username;
+            this.email = obj.email;
+            this.password = obj.password;
+        }
+
+        async function createAccountData() {
+            var username = document.getElementById('Username').value;
+            var email = document.getElementById('Email').value;
+            var password = document.getElementById('Password').value;
+
+            var obj = new createObj({
+                username: username,
+                email: email,
+                password: password
+            });
+
+            fetch('http://localhost:8080/account/', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(obj),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
         async function retrieveTestData() {
             const response = await fetch('http://localhost:8080/account/');
             document.getElementById("retrieveTestData").innerHTML = "<b>Data: </b>" + await response.json();
+        }
+
+        async function retrieveAccountData() {
+            const response = await fetch('http://localhost:8080/account/all');
+            let x = await response.json();
+            document.getElementById("myData").innerHTML = JSON.stringify(x);
         }
 
         function documentation() {

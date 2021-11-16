@@ -55,7 +55,7 @@ router.get('/all', function(req, res){
     res.send(accounts);
 });
 
-router.post('/add', function(req, res){
+router.post('/', function(req, res){
     var existAccounts = getAccountData()
     const newAccountId = Math.floor(100000 + Math.random() * 900000)
  
