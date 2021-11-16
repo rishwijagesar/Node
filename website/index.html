@@ -1,8 +1,101 @@
 <html>
-    <header>
-        <title>Project Node</title>
-    </header>
-    <body>
-        <p>Rishwi is the best!!</p>
-    </body>
+<header>
+    <title>Project Node</title>
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 98vh;
+            grid-column-gap: 5px;
+        }
+
+        .box {
+            display: inline-block;
+            min-width: 20%;
+            min-height: 40%;
+            background-color: bisque;
+        }
+    </style>
+</header>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Rishwi is the best!!</h1>
+
+            <h2>API Tests</h2>
+            <button onclick="retrieveTestData()">Retrieve Test Data</button>
+            <p id="retrieveTestData"></p>
+
+            <h2>Documentation</h2>
+            <button onclick="documentation()">Show Documentation</button>
+
+            <h2>The Funny Buttons</h2>
+
+            <button onclick="ledOn()">Turn on LED</button>
+            <p id="ledOn"></p>
+            <button onclick="ledOff()">Turn off LED</button>
+            <p id="ledOff"></p>
+            <button onclick="ledBlink()">Blink LED</button>
+            <p id="ledBlink"></p>
+            <button onclick="ledPulse()">Pulse LED</button>
+            <p id="ledPulse"></p>
+
+            <button onclick="moveLeft()">Move Left</button>
+            <p id="moveLeft"></p>
+            <button onclick="moveLeft()">Move Right</button>
+            <p id="moveRight"></p>
+            <button onclick="drive()">Drive</button>
+            <p id="drive"></p>
+            <button onclick="stopdrive()">Stop Driving</button>
+            <p id="stopdrive"></p>
+        </div>
+
+        <div class="box">
+            <p>Output</p>
+        </div>
+    </div>
+
+    <script>
+
+        async function retrieveTestData() {
+            const response = await fetch('http://localhost:8080/account/');
+            document.getElementById("retrieveTestData").innerHTML = "<b>Data: </b>" + await response.json();
+        }
+
+        function documentation() {
+            window.location.href = 'http://localhost:8080/docs';
+        }
+
+        function ledOn() {
+            document.getElementById("ledOn").innerHTML = "Led is On";
+            document.getElementById("ledOff").innerHTML = "";
+            document.getElementById("ledBlink").innerHTML = "";
+            document.getElementById("ledPulse").innerHTML = "";
+        }
+
+        function ledOff() {
+            document.getElementById("ledOff").innerHTML = "Led is Off";
+            document.getElementById("ledOn").innerHTML = "";
+            document.getElementById("ledBlink").innerHTML = "";
+            document.getElementById("ledPulse").innerHTML = "";
+        }
+
+        function ledBlink() {
+            document.getElementById("ledOff").innerHTML = "";
+            document.getElementById("ledOn").innerHTML = "";
+            document.getElementById("ledBlink").innerHTML = "Led is Blinking";
+            document.getElementById("ledPulse").innerHTML = "";
+        }
+
+        function ledPulse() {
+            document.getElementById("ledOff").innerHTML = "";
+            document.getElementById("ledOn").innerHTML = "";
+            document.getElementById("ledBlink").innerHTML = "";
+            document.getElementById("ledPulse").innerHTML = "Led is pulsing";
+        }
+    </script>
+</body>
+
 </html>
