@@ -30,6 +30,7 @@
 
             <button onclick="retrieveAccountData()">Retrieve Account Data</button>
             </br>
+            </br>
             <button onclick="createAccountData()">Create Account Data</button>
             </br>
             </br>
@@ -121,6 +122,7 @@
         }
 
         function ledOn() {
+            const response = await fetch('http://localhost:8080/led/on');
             document.getElementById("ledOn").innerHTML = "Led is On";
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
@@ -128,6 +130,7 @@
         }
 
         function ledOff() {
+            const response = await fetch('http://localhost:8080/led/off');
             document.getElementById("ledOff").innerHTML = "Led is Off";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
@@ -135,6 +138,7 @@
         }
 
         function ledBlink() {
+            const response = await fetch('http://localhost:8080/led/blink');
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "Led is Blinking";
@@ -142,11 +146,29 @@
         }
 
         function ledPulse() {
+            const response = await fetch('http://localhost:8080/led/pulse');
             document.getElementById("ledOff").innerHTML = "";
             document.getElementById("ledOn").innerHTML = "";
             document.getElementById("ledBlink").innerHTML = "";
             document.getElementById("ledPulse").innerHTML = "Led is pulsing";
         }
+
+        function moveLeft() {
+            const response = await fetch('http://localhost:8080/stepper/left');
+        }
+
+        function moveRight() {
+            const response = await fetch('http://localhost:8080/stepper/right');
+        }
+
+        function drive() {
+            const response = await fetch('http://localhost:8080/servo/spin');
+        }
+
+        function stopdrive() {
+            const response = await fetch('http://localhost:8080/servo/stop');
+        }
+
     </script>
 </body>
 
