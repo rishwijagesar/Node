@@ -2,6 +2,7 @@ const express = require('express');
 const { spawn } = require('child_process');
 const router = express.Router();
 
+// move to left
 router.get('/left', (req, res) => {
     let dataToSend;
     const python = spawn('python', ['./helper/stepperLeft.py']);
@@ -12,6 +13,7 @@ router.get('/left', (req, res) => {
     });
 });
 
+// move to right
 router.get('/right', (req, res) => {
     let dataToSend;
     const python = spawn('python', ['./helper/stepperRight.py']);

@@ -10,10 +10,12 @@ const servo = new Servo("P1-12");
 
 board.on('ready', function () {
 
+    // spin servo
     router.get('/spin', function (req, res) {        
         servo.sweep();
     });
 
+    // stop servo spinning
     router.get('/stop', function (req, res) {
         servo.stop();
     });
