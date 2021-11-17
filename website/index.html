@@ -62,7 +62,7 @@
 
             <button onclick="moveLeft()">Move Left</button>
             <p id="moveLeft"></p>
-            <button onclick="moveLeft()">Move Right</button>
+            <button onclick="moveRight()">Move Right</button>
             <p id="moveRight"></p>
             <button onclick="drive()">Drive</button>
             <p id="drive"></p>
@@ -81,7 +81,7 @@
         function deleteAccountData() {
             const id = document.getElementById('id').value;
             fetch('http://localhost:8080/account/' + id, {
-                method: 'DELETE', // or 'PUT'
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -110,7 +110,7 @@
             });
 
             fetch('http://localhost:8080/account/', {
-                method: 'POST', // or 'PUT'
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
