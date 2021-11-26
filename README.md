@@ -20,20 +20,20 @@ Install the latest NodeJS
 Clone project to raspberry pi:
 
 ```
-'git clone https://github.com/rishwijagesar/Node.git'
+git clone https://github.com/rishwijagesar/Node.git
 ```
 
 Go to project folder 
 ```
-'cd Node'
+cd Node
 ```
 
 Install depedencies
 ```
->'npm i'
+npm i
 ```
 
 Run project
 ```
->'npm start'
+npm start
 ```
