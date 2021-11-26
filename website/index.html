@@ -16,58 +16,65 @@
             min-height: 40%;
             background-color: bisque;
         }
+
+        .content {
+            margin-left: 5%;
+        }
     </style>
 </header>
 
 <body>
     <div class="container">
         <div class="box">
-            <h1>Rishwi is the best!!</h1>
-            <button onclick="presentation()">Show Presentation</button>
+            <div class="content">
+                <h1>Rishwi is the best!!</h1>
+                <button onclick="presentation()">Show Presentation</button>
 
-            <h2>API Tests</h2>
-            <button onclick="retrieveTestData()">Retrieve Test Data</button>
-            <p id="retrieveTestData"></p>
+                <h2>API Tests</h2>
+                <button onclick="retrieveTestData()">Retrieve Test Data</button>
+                <p id="retrieveTestData"></p>
 
-            <button onclick="retrieveAccountData()">Retrieve Account Data</button>
-            </br>
-            </br>
-            <button onclick="createAccountData()">Create Account Data</button>
+                <button onclick="retrieveAccountData()">Retrieve Account Data</button>
+                </br>
+                </br>
+                <button onclick="createAccountData()">Create Account Data</button>
+                </br>
+                </br>
+                <label for="fusername">Username:</label>
+                <input type="text" id="Username" name="fname"><br><br>
+                <label for="femail">Email:</label>
+                <input type="text" id="Email" name="fname"><br><br>
+                <label for="fpassword">Password:</label>
+                <input type="text" id="Password" name="fname"><br><br>
+                <button onclick="deleteAccountData()">Delete Account Data</button>
+                </br>
+                </br>
+                <label for="fid">ID:</label>
+                <input type="text" id="id" name="fname"><br>
 
-            <label for="fusername">Username:</label>
-            <input type="text" id="Username" name="fname"><br><br>
-            <label for="femail">Email:</label>
-            <input type="text" id="Email" name="fname"><br><br>
-            <label for="fpassword">Password:</label>
-            <input type="text" id="Password" name="fname"><br><br>
-            <button onclick="deleteAccountData()">Delete Account Data</button>
-            </br>
-            </br>
-            <label for="fid">ID:</label>
-            <input type="text" id="id" name="fname"><br><br>
+                <h2>Documentation</h2>
+                <button onclick="documentation()">Show Documentation</button>
 
-            <h2>Documentation</h2>
-            <button onclick="documentation()">Show Documentation</button>
+                <h2>The Funny Buttons</h2>
 
-            <h2>The Funny Buttons</h2>
+                <button onclick="ledOn()">Turn on LED</button>
+                <p id="ledOn"></p>
+                <button onclick="ledOff()">Turn off LED</button>
+                <p id="ledOff"></p>
+                <button onclick="ledBlink()">Blink LED</button>
+                <p id="ledBlink"></p>
+                <button onclick="ledPulse()">Pulse LED</button>
+                <p id="ledPulse"></p>
 
-            <button onclick="ledOn()">Turn on LED</button>
-            <p id="ledOn"></p>
-            <button onclick="ledOff()">Turn off LED</button>
-            <p id="ledOff"></p>
-            <button onclick="ledBlink()">Blink LED</button>
-            <p id="ledBlink"></p>
-            <button onclick="ledPulse()">Pulse LED</button>
-            <p id="ledPulse"></p>
-
-            <button onclick="moveLeft()">Move Left</button>
-            <p id="moveLeft"></p>
-            <button onclick="moveRight()">Move Right</button>
-            <p id="moveRight"></p>
-            <button onclick="drive()">Drive</button>
-            <p id="drive"></p>
-            <button onclick="stopdrive()">Stop Driving</button>
-            <p id="stopdrive"></p>
+                <button onclick="moveLeft()">Move Left</button>
+                <p id="moveLeft"></p>
+                <button onclick="moveRight()">Move Right</button>
+                <p id="moveRight"></p>
+                <button onclick="drive()">Drive</button>
+                <p id="drive"></p>
+                <button onclick="stopdrive()">Stop Driving</button>
+                <p id="stopdrive"></p>
+            </div>
         </div>
 
         <div class="box">
