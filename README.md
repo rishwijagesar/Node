@@ -1,4 +1,11 @@
-# Raspberry Pi Setup
+# Project NodeJS Car 
+
+This project is about creating a DIY car made out of a cardboard operated by a Raspberry Pi 3b+.
+The car is operated through the NodeJS Express library and some python. 
+Additional features are added to show the working parts of express and may be used as integration tests in order to test node endpoints
+
+
+## Raspberry Pi Setup
 
 setup the raspberry pi with the following pinout
 ```
@@ -18,7 +25,7 @@ PIN 34    -       LED min
 ## Required parts
 
 ```
-- Raspberry Pi
+- Raspberry Pi 3b+
 - Servo Motor
 - Stepper Motor
 - Stepper Motor Drive Board
@@ -52,4 +59,14 @@ npm i
 Run project
 ```
 npm start
+```
+
+visit the website on:
+```
+http://localhost:8080
+```
+
+visit the swagger page on:
+```
+http://localhost:8080/docs
 ```
