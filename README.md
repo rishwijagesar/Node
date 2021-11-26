@@ -15,6 +15,22 @@ PIN 32    -       LED plus
 PIN 34    -       LED min
 ```
 
+## Required parts
+
+```
+- Raspberry Pi
+- Servo Motor
+- Stepper Motor
+- Stepper Motor Drive Board
+- Breadboard
+- Led Lights
+- SD Card
+- HDMI Cable
+- Power Cable Raspberry Pi
+- Jumper Wires
+```
+
+
 Install the latest NodeJS
 
 Clone project to raspberry pi:
